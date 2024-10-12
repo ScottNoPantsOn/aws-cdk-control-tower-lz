@@ -1,6 +1,6 @@
 import { awscdk } from 'projen';
 const project = new awscdk.AwsCdkTypeScriptApp({
-  cdkVersion: '2.1.0',
+  cdkVersion: '2.162.0',
   defaultReleaseBranch: 'main',
   name: 'aws-cdk-control-tower-lz',
   projenrcTs: true,
@@ -10,4 +10,22 @@ const project = new awscdk.AwsCdkTypeScriptApp({
   // devDeps: [],             /* Build dependencies for this module. */
   // packageName: undefined,  /* The "name" in package.json. */
 });
+
+const common_exclude = [
+  'cdk.out',
+  'cdk.context.json',
+  'yarn-error.log',
+  'coverage',
+  '.DS_Store',
+  'config/*',
+  'lib',
+  '*.js',
+  '*.js.map',
+  '*.d.ts',
+  '.idea',
+];
+
+project.gitignore.exclude(...common_exclude);
+project.npmignore?.exclude(...common_exclude);
+
 project.synth();

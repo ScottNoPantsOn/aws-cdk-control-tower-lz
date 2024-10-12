@@ -22,6 +22,17 @@ tsconfig.tsbuildinfo
 !/assets/
 cdk.out/
 .cdk.staging/
+cdk.out
+cdk.context.json
+yarn-error.log
+coverage
+.DS_Store
+config/*
+lib
+*.js
+*.js.map
+*.d.ts
+.idea
 /.gitattributes
 /.projenrc.ts
 /projenrc
