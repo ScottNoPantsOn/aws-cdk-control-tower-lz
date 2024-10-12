@@ -49,7 +49,7 @@ describe('ControlTowerIamRoles', () => {
                 {
                   Ref: 'AWS::Partition',
                 },
-                ':iam::aws:policy/AWSControlTowerServiceRolePolicy',
+                ':iam::aws:policy/service-role/AWSControlTowerServiceRolePolicy',
               ],
             ],
           },
@@ -101,7 +101,7 @@ describe('ControlTowerIamRoles', () => {
                 {
                   Ref: 'AWS::Partition',
                 },
-                ':iam::aws:policy/AWSConfigRoleForOrganizations',
+                ':iam::aws:policy/service-role/AWSConfigRoleForOrganizations',
               ],
             ],
           },
