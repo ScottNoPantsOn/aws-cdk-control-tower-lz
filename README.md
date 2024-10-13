@@ -4,8 +4,7 @@ This project demonstrates how to configure and deploy an [AWS Control Tower](htt
 Control Tower is a straightforward way to set up and govern an AWS multi-account environment, following prescriptive best practices.
 It serves as an orchestration layer that facilitates deployment, management and governance of your AWS accounts.  
 
-This app leverages the CDK to simplify configuration and deployment of a landing zone, using Infrastructure as Code (IaC). It is **not** a landing zone customization or management solution.
-It's sole function is to deploy the necessary resources for a default Control Tower landing zone.
+This app leverages the CDK to simplify configuration and deployment of a landing zone, using Infrastructure as Code (IaC). 
 Use it as is, as part of [establishing your initial cloud foundation on AWS](https://aws.amazon.com/solutions/guidance/establishing-an-initial-foundation-using-control-tower-on-aws/), or as a reference for building your own custom solution.
 
 ![](img/control-tower-landing-zone-diagram.png)  
@@ -19,15 +18,15 @@ _Overview of the ControlTowerLandingZone construct._
 
 The `ControlTowerLandingZone` construct is a layer 3 (L3) construct that creates all the necessary resources for a Control Tower landing zone deployment. It consists of several other constructs that handle service specific resource creation for the Control Tower landing zone and it's pre-requisites.
 
-The `Organization` construct handles the necessary AWS Organizations resources, including the organization itself (optional), and two foundational shared accounts for the Control Tower landing zone.
+The `Organization` construct handles the necessary AWS Organizations resources, including the organization itself, and two foundational shared accounts for the Control Tower landing zone.
 
 The `ControlTowerIamRoles` construct creates four IAM service roles required for Control Tower to access and manage the associated infrastructure.
 
 If encryption is enabled, a KMS customer managed key is created via the `ControlTowerKmsKey` construct. This key is used for data encryption with Control Tower enabled services (AWS CloudTrail, AWS Config) and the associated AWS S3 data.
 
 ## Prerequisites
-The construct expects an existing AWS Organizations organization to be created by default. You will need programmatic access to the management account of your organization, using credentials with adequate permissions to deploy the CDK app.  
-If creating a new environment from scratch, it is recommended to enable IAM Identity Center with AWS Organizations and then grant access to a user for this.  
+You will need programmatic access to the management account of your organization, using credentials with administrator access permissions to deploy the CDK app. 
+If creating a new environment from scratch, it is recommended to enable IAM Identity Center with AWS Organizations and then grant access to a user for this. Control Tower will assume control (pun intended) of the existing organization and IAM Identity Center instance. 
 For detailed instruction, see [AWS Control Tower - Setting Up](https://docs.aws.amazon.com/controltower/latest/userguide/setting-up.html).
 
 ## Working with Projen
