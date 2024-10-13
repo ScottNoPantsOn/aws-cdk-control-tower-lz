@@ -4,6 +4,8 @@ import { ControlTowerIamRoles } from './prerequisites/iam-roles';
 import { ControlTowerKmsKey } from './prerequisites/kms-key';
 import { Organization } from './prerequisites/organization';
 
+// TODO: Replace when API supports retrieval of latest version
+export const DEFAULT_LANDING_ZONE_VERSION = '3.3';
 
 /**
  * Interface for defining a ControlTowerLandingZone construct
@@ -126,7 +128,7 @@ export class ControlTowerLandingZone extends Construct {
 
     // Create the Control Tower landing zone.
     this.controlTowerLandingZone = new CfnLandingZone(this, id, {
-      version: props.landingZoneVersion || '3.3',
+      version: props.landingZoneVersion || DEFAULT_LANDING_ZONE_VERSION,
       manifest: {
         governedRegions: props.governedRegions,
         organizationStructure: {
@@ -146,7 +148,7 @@ export class ControlTowerLandingZone extends Construct {
             accessLoggingBucket: {
               retentionDays: props.accessLoggingBucketRetentionPeriod || 3600,
             },
-            kmsKeyArn: kmsKeyArn || null,
+            kmsKeyArn: kmsKeyArn,
           },
           enabled: true,
         },
