@@ -24,6 +24,15 @@ The `ControlTowerIamRoles` construct creates four IAM service roles required for
 
 If encryption is enabled, a KMS customer managed key is created via the `ControlTowerKmsKey` construct. This key is used for data encryption with Control Tower enabled services (AWS CloudTrail, AWS Config) and the associated AWS S3 data.
 
+The resulting AWS Control Tower landing zone will include the following:
+- 2 organizational units, one for your shared accounts and one for accounts that will be provisioned by your users.
+- 3 shared accounts, which are the management account and isolated accounts for log archive and security audit.
+- A CloudTrail Organization trail.
+- An Account Factory service leveraging Service Catalogue.
+- An IAM Identity Center organization instance.
+- 20 preventive controls to enforce policies and 3 detective controls to detect configuration violations.
+
+
 ## Prerequisites
 You will need programmatic access to the management account of your organization, using credentials with administrator access permissions to deploy the CDK app. 
 If creating a new environment from scratch, it is recommended to enable IAM Identity Center with AWS Organizations and then grant access to a user for this. Control Tower will assume control (pun intended) of the existing organization and IAM Identity Center instance. 
@@ -90,14 +99,6 @@ npx projen deploy
 
 During deployment, the root management account email will receive an IAM Identity Center invitation email for the AWS Control Tower Admin user.
 The security account email will then receive an SNS subscription confirmation request email for each governed region in your landing zone configuration.
-
-The resulting AWS Control Tower landing zone will include the following:
-- 2 organizational units, one for your shared accounts and one for accounts that will be provisioned by your users.
-- 3 shared accounts, which are the management account and isolated accounts for log archive and security audit.
-- A CloudTrail Organization Trail configuration.
-- A Service Catalogue product for Account Factory.
-- Your IAM Identity Center access configuration.
-- 20 preventive controls to enforce policies and 3 detective controls to detect configuration violations.
 
 ## Testing
 

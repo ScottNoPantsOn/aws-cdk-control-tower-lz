@@ -49,27 +49,30 @@ export interface IControlTowerLandingZoneProps {
   governedRegions: string[];
   /**
    * Set the Control Tower landing zone version.
+   * @default '3.3'
+   * @optional
    */
   landingZoneVersion?: string;
   /**
    * Set the standard account log retention for Control Tower in days.
    * @default 365
+   * @optional
    */
   loggingBucketRetentionPeriod?: string;
   /**
    * Set the access log retention for Control Tower in days.
    * @default 3600
+   * @optional
    */
   accessLoggingBucketRetentionPeriod?: string;
   /**
-   * Enable KMS encryption for Control Tower enabled services(AWS CloudTrail, AWS Config) and the associated AWS S3 data.
-   * @default true
+   * Set KMS encryption for Control Tower enabled services(AWS CloudTrail, AWS Config) and the associated AWS S3 data.
    */
   encryption: boolean;
   /**
    * Optionally provide your own KMS key for encryption. Takes the ARN of a customer managed key.
    * The key must meet the {@link https://docs.aws.amazon.com/controltower/latest/userguide/configure-kms-keys.html necessary requirements}.
-   * If no key is provided, the construct will create one for you.
+   * If no key is provided but encryption is enabled, the construct will create one for you.
    * @optional
    */
   kmsKeyArn?: string;
@@ -89,7 +92,6 @@ export interface IControlTowerLandingZoneProps {
 
 /**
  * Deploy a Control Tower landing zone.
- * The construct expects you to have enabled IAM Identity Center with AWS Organizations.
  */
 export class ControlTowerLandingZone extends Construct {
   public readonly controlTowerLandingZone: CfnLandingZone;
